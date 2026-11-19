@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#10a37f">
+<title>Servicios del hogar</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--tx:#1d1d1f;--mu:#6e6e73;--bd:#e0e0e5;--ac:#10a37f;--g:#c9f0dc;--gt:#0b6b4d;--r:#fbd5d5;--rt:#a12020;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#111;--card:#1c1c1e;--tx:#f2f2f2;--mu:#9a9aa0;--bd:#333;--g:#14532d;--gt:#86efac;--r:#5b1f1f;--rt:#fca5a5;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px Roboto,system-ui,-apple-system,sans-serif;padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(84px + env(safe-area-inset-bottom,0px))}
+h1{font-size:18px;margin:2px 0 10px}h2{font-size:13px;margin:0 0 8px;color:var(--mu);font-weight:600}h3{font-size:16px;margin:0 0 4px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:12px;min-width:0}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{flex:1;min-width:0;background:none;border:0;color:var(--mu);font-size:11px;padding:4px 0;line-height:1.3}nav button span{display:block;font-size:19px}nav button.on{color:var(--ac);font-weight:700}
+input,select{display:block;width:100%;min-width:0;max-width:100%;min-height:44px;padding:10px;margin:3px 0 10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--mu) 50%),linear-gradient(135deg,var(--mu) 50%,transparent 50%);background-position:calc(100% - 17px) 19px,calc(100% - 12px) 19px;background-size:5px 5px;background-repeat:no-repeat;padding-right:30px}
+input[type=checkbox]{width:18px;height:18px;min-height:0;margin:0;padding:0;-webkit-appearance:auto;appearance:auto;accent-color:var(--ac)}
+label,.lb{font-size:12px;color:var(--mu);display:block}
+.btn{display:block;width:100%;min-height:44px;padding:11px;border:0;border-radius:10px;background:var(--ac);color:#fff;font:inherit;font-weight:600}
+.btn.s{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.btn.d{background:var(--r);color:var(--rt)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}.btns .btn{flex:1 1 40%}
+.row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:14px;min-width:0}.row:last-child{border:0}
+.grow{flex:1;min-width:0;overflow-wrap:anywhere}.nw{white-space:nowrap}
+.mu{color:var(--mu);font-size:12px;overflow-wrap:anywhere}
+.ib{flex:none;width:40px;height:40px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:17px;padding:0}.ib.d{color:#d33}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.hd b{overflow-wrap:anywhere}
+.bar{height:7px;border-radius:4px;background:var(--r);overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;background:var(--ac)}
+.chip{display:inline-block;font-size:12px;border-radius:10px;padding:2px 8px;font-weight:600;white-space:nowrap}.ok{background:var(--g);color:var(--gt)}.bad{background:var(--r);color:var(--rt)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}.chips label{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--tx);border:1px solid var(--bd);background:var(--bg);border-radius:18px;padding:7px 12px;min-height:36px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stats div{background:var(--bg);border-radius:10px;padding:8px 6px;text-align:center;min-width:0}.stats b{display:block;font-size:14px;overflow-wrap:anywhere}.stats span{font-size:11px;color:var(--mu)}
+.mnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.mnav b::first-letter{text-transform:uppercase}.mnav b{font-size:16px;text-align:center;flex:1}.mnav .ib{width:44px;height:44px;font-size:22px}
+.add{display:flex;gap:8px;align-items:flex-start}.add input{margin:0;flex:1}.add .btn{width:auto;flex:none;padding:0 16px}
+#toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:90%;text-align:center;background:var(--tx);color:var(--card);padding:8px 14px;border-radius:16px;opacity:0;transition:.2s;pointer-events:none;font-size:13px;z-index:9}#toast.on{opacity:1}
+</style></head><body>
+<h1>💡 Servicios del hogar</h1><div id="v"></div><nav id="n"></nav><div id="toast"></div>
+<script>
+const K='serviciosHogar';let _c=0;
+const uid=()=>Date.now().toString(36)+(_c++).toString(36)+Math.random().toString(36).slice(2,5);
+function def(){const m=['Yo','Hermano 1','Hermano 2','Hermano 3'].map(n=>({id:uid(),name:n}));
+return{cur:'Q',members:m,services:['Luz','Internet','Agua'].map(n=>({id:uid(),name:n,p:m.map(x=>x.id)})),accounts:['BANRURAL','ZIGI','Efectivo'].map(n=>({id:uid(),name:n})),bills:[],pay:[]}}
+const okS=s=>s&&['members','services','accounts','bills','pay'].every(k=>Array.isArray(s[k]));
+let S=def();
+try{const x=JSON.parse(localStorage.getItem(K)||'null');if(okS(x))S=Object.assign(def(),x)}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){msg('No se pudo guardar')}};
+const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const r2=n=>Math.round((n+Number.EPSILON)*100)/100;
+const num=s=>{const v=parseFloat(String(s).trim().replace(',','.'));return isFinite(v)?v:NaN};
+const money=n=>S.cur+' '+r2(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const n12=mo=>{const[y,m]=mo.split('-').map(Number);return y*12+m-1};
+const shift=(mo,d)=>{const n=n12(mo)+d;return Math.floor(n/12)+'-'+String(n%12+1).padStart(2,'0')};
+const mlong=mo=>{const[y,m]=mo.split('-').map(Number);return new Date(y,m-1,1).toLocaleDateString('es',{month:'long',year:'numeric'})};
+const msg=t=>{const e=document.getElementById('toast');e.textContent=t;e.className='on';clearTimeout(msg.t);msg.t=setTimeout(()=>e.className='',2200)};
+const $=id=>document.getElementById(id);
+let tab='res',cm=today().slice(0,7),ce='',addOpen={};
+const nm=(l,id)=>{const x=S[l].find(y=>y.id==id);return x?x.name:'—'};
+const bill=(sv,mo)=>S.bills.find(b=>b.sv==sv&&b.mo==mo);
+const owed=(b,m)=>b&&b.p.includes(m)?r2(b.t/b.p.length):0;
+const paidBy=(m,sv,mo)=>r2(S.pay.filter(p=>p.m==m&&p.sv==sv&&p.mo==mo).reduce((a,p)=>a+p.a,0));
+const sumB=(arr,f)=>arr.reduce((a,x)=>a+f(x),0);
+function mstats(mo){let tot=0,ow=0,pd=0,pe=0;S.services.forEach(s=>{const b=bill(s.id,mo);if(b)tot+=b.t;S.members.forEach(m=>{const o=owed(b,m.id),p=paidBy(m.id,s.id,mo);ow+=o;pd+=p;pe+=Math.max(0,o-p)})});return{tot,ow,pd,pe}}
+const mv=d=>{cm=shift(cm,d);ce='';draw()};
+const monthNav=()=>`<div class="mnav"><button class="ib" onclick="mv(-1)" aria-label="Mes anterior">‹</button><b>${mlong(cm)}</b><button class="ib" onclick="mv(1)" aria-label="Mes siguiente">›</button></div>`;
+const optL=(l,s,extra)=>(extra||'')+S[l].map(x=>`<option value="${x.id}" ${x.id==s?'selected':''}>${E(x.name)}</option>`).join('');
+const METH=['Efectivo','Transferencia','Depósito','Otro'];
+const optN=(l,s)=>l.map(x=>`<option ${x==s?'selected':''}>${E(x)}</option>`).join('');
+const go=t=>{tab=t;ce='';draw();scrollTo(0,0)};
+const chipsFor=(ids,pre)=>S.members.map(m=>`<label><input type="checkbox" id="${pre}_${m.id}" ${ids.includes(m.id)?'checked':''} onchange="bh('${pre.slice(3)}')"> ${E(m.name)}</label>`).join('');
+
+/* ---------- Recibos ---------- */
+function bh(sv){const el=$('bh_'+sv);if(!el)return;const t=num($('bt_'+sv).value),n=S.members.filter(m=>$('bp_'+sv+'_'+m.id)&&$('bp_'+sv+'_'+m.id).checked).length;
+el.textContent=t>0&&n?`Cada uno abona ${money(t/n)} (${n} ${n==1?'persona':'personas'})`:'Escribe el total y elige quién participa'}
+function saveBill(sv){const t=num($('bt_'+sv).value);if(!(t>0))return msg('Escribe el total del recibo');
+const p=S.members.filter(m=>$('bp_'+sv+'_'+m.id).checked).map(m=>m.id);if(!p.length)return msg('Elige al menos una persona');
+const c=$('bc_'+sv).value;let b=bill(sv,cm);if(b){b.t=t;b.p=p;b.c=c}else S.bills.push({id:uid(),sv,mo:cm,t,p,c});save();msg('Recibo guardado');draw()}
+function copyPrev(sv){const b=bill(sv,shift(cm,-1));if(!b)return msg('No hay recibo del mes anterior');$('bt_'+sv).value=b.t;bh(sv)}
+function delBill(sv){if(!confirm('¿Quitar el recibo de este mes? Los abonos ya registrados se conservan.'))return;S.bills=S.bills.filter(b=>!(b.sv==sv&&b.mo==cm));save();draw()}
+function recibos(){if(!S.services.length)return empty('Primero agrega tus servicios en Ajustes.');
+return monthNav()+S.services.map(s=>{const b=bill(s.id,cm),pr=b?b.p:s.p.filter(id=>S.members.some(m=>m.id==id));
+return `<div class="card"><h3>${E(s.name)}</h3>
+<label>Total del recibo de este mes (cambia cada mes)</label><input id="bt_${s.id}" type="text" inputmode="decimal" placeholder="0.00" value="${b?b.t:''}" oninput="bh('${s.id}')">
+<label>Quiénes lo pagan</label><div class="chips">${chipsFor(pr,'bp_'+s.id)}</div>
+<div class="mu" id="bh_${s.id}" style="margin:-4px 0 10px"></div>
+<label>Ya pagué el recibo desde</label><select id="bc_${s.id}">${optL('accounts',b&&b.c,'<option value="">Aún no lo he pagado</option>')}</select>
+<div class="btns"><button class="btn" onclick="saveBill('${s.id}')">Guardar</button><button class="btn s" onclick="copyPrev('${s.id}')">Usar mes anterior</button>${b?`<button class="btn d" onclick="delBill('${s.id}')">Quitar</button>`:''}</div></div>`}).join('')}
+
+/* ---------- Pagos ---------- */
+function pf(fill){const m=$('pm').value,s=$('ps').value,h=$('ph');if(!m||!s){h.textContent='';return}
+const b=bill(s,cm),o=owed(b,m),p=paidBy(m,s,cm);
+if(!b)h.textContent='Este servicio aún no tiene recibo en este mes (ve a Recibos).';
+else if(!o)h.textContent='Esta persona no participa en este servicio este mes.';
+else{const pe=Math.max(0,o-p);h.textContent=`Le toca ${money(o)} · ya abonó ${money(p)} · falta ${money(pe)}`;if(fill&&pe>0)$('pa').value=r2(pe)}}
+function addP(){const a=num($('pa').value);if(!(a>0))return msg('Escribe un monto');if(!$('pm').value||!$('ps').value)return msg('Elige persona y servicio');
+S.pay.unshift({id:uid(),m:$('pm').value,sv:$('ps').value,mo:cm,a:r2(a),d:$('pd').value||today(),t:$('pt').value,c:$('pc').value,n:$('pn').value.trim()});save();msg('Abono guardado');draw()}
+function upP(id,p,v,t){const x=S.pay.find(y=>y.id==id);if(!x)return;if(t=='n'){v=num(v);if(!(v>0)){msg('Monto no válido');draw();return}v=r2(v)}else if((t=='d'||t=='mo')&&!v){draw();return}x[p]=v;save();draw()}
+function fld(id,p,lb,t,v,inner){const c=`onchange="upP('${id}','${p}',this.value,'${t}')"`;
+return `<label>${lb}</label>`+(inner!=null?`<select ${c}>${inner}</select>`:`<input type="${t=='d'?'date':t=='mo'?'month':'text'}" ${t=='n'?'inputmode="decimal"':''} value="${E(v)}" ${c}>`)}
+function delP(id){if(!confirm('¿Eliminar este abono?'))return;S.pay=S.pay.filter(p=>p.id!=id);ce='';save();draw()}
+const ted=id=>{ce=ce===id?'':id;draw()};
+function prow(p){const open=ce==='p'+p.id;
+return `<div style="border-bottom:1px solid var(--bd)"><div class="row" style="border:0"><div class="grow"><b>${E(nm('members',p.m))}</b> · ${E(nm('services',p.sv))} · ${money(p.a)}<div class="mu">${E(p.d)} · ${E(p.t)} · ${E(nm('accounts',p.c))}${p.n?' · '+E(p.n):''}</div></div><button class="ib" onclick="ted('p${p.id}')" aria-label="Editar">${open?'✓':'✎'}</button><button class="ib d" onclick="delP('${p.id}')" aria-label="Eliminar">×</button></div>
+${open?`<div style="padding-bottom:6px">${fld(p.id,'m','Persona','x',0,optL('members',p.m))+fld(p.id,'sv','Servicio','x',0,optL('services',p.sv))+fld(p.id,'mo','Mes que paga','mo',p.mo)+fld(p.id,'a','Monto','n',p.a)+fld(p.id,'d','Fecha','d',p.d)+fld(p.id,'t','Forma de pago','x',0,optN(METH,p.t))+fld(p.id,'c','Dónde lo tengo','x',0,optL('accounts',p.c,'<option value="">—</option>'))+fld(p.id,'n','Nota','t',p.n||'')}</div>`:''}</div>`}
+function pagos(){if(!S.members.length||!S.services.length)return empty('Agrega personas y servicios en Ajustes.');
+const l=S.pay.filter(p=>p.mo==cm);
+return monthNav()+`<div class="card"><h2>Registrar abono</h2><label>Quién paga</label><select id="pm" onchange="pf(1)">${optL('members','')}</select>
+<label>Servicio</label><select id="ps" onchange="pf(1)">${optL('services','')}</select>
+<div class="mu" id="ph" style="margin:-4px 0 10px"></div>
+<label>Monto</label><input id="pa" type="text" inputmode="decimal" placeholder="0.00">
+<label>Fecha</label><input id="pd" type="date" value="${today()}">
+<label>Forma de pago</label><select id="pt">${optN(METH)}</select>
+<label>Dónde lo tengo (banco / efectivo)</label><select id="pc">${optL('accounts','','<option value="">—</option>')}</select>
+<label>Nota (opcional)</label><input id="pn" type="text">
+<button class="btn" onclick="addP()">Guardar abono</button></div>
+<div class="card"><h2>Abonos de ${mlong(cm)}</h2>${l.length?l.map(prow).join(''):'<div class="mu">Sin abonos este mes.</div>'}</div>`}
+
+/* ---------- Resumen ---------- */
+function resumen(){if(!S.services.length||!S.members.length)return empty('Agrega personas y servicios en Ajustes.');
+const t=mstats(cm);let h=monthNav()+`<div class="card"><h2>Resumen del mes</h2><div class="stats"><div><b>${money(t.tot)}</b><span>Total recibos</span></div><div><b>${money(t.pd)}</b><span>Abonado</span></div><div><b style="color:${t.pe>0?'var(--rt)':'var(--gt)'}">${money(t.pe)}</b><span>Pendiente</span></div></div></div>`;
+h+=S.services.map(s=>{const b=bill(s.id,cm);
+if(!b){const ex=r2(sumB(S.pay.filter(p=>p.sv==s.id&&p.mo==cm),p=>p.a));return `<div class="card"><div class="hd"><b>${E(s.name)}</b><span class="mu">Sin recibo</span></div><div class="mu" style="margin:6px 0">Aún no pones el total de este mes${ex?` (hay ${money(ex)} abonado)`:''}.</div><button class="btn s" onclick="go('rec')">Poner total</button></div>`}
+const ow=sumB(b.p,id=>owed(b,id)),pd=sumB(S.members,m=>Math.min(paidBy(m.id,s.id,cm),owed(b,m.id))),pc=ow?Math.min(100,pd/ow*100):0;
+return `<div class="card"><div class="hd"><b>${E(s.name)}</b><b>${money(b.t)}</b></div><div class="mu">Cada uno: ${money(b.t/b.p.length)} · ${b.c?'Pagado desde '+E(nm('accounts',b.c)):'Recibo sin pagar aún'}</div>
+<div class="bar"><i style="width:${pc}%"></i></div><div class="mu" style="margin-bottom:4px">Abonado ${money(pd)} de ${money(ow)}</div>
+${S.members.filter(m=>b.p.includes(m.id)).map(m=>{const o=owed(b,m.id),p=paidBy(m.id,s.id,cm),pe=Math.max(0,o-p);return `<div class="row"><div class="grow">${E(m.name)}<div class="mu">Abonó ${money(p)} de ${money(o)}</div></div>${pe>0?`<span class="chip bad">Falta ${money(pe)}</span>`:`<span class="chip ok">✓ Pagado</span>`}</div>`}).join('')}</div>`}).join('');
+h+=`<div class="card"><h2>Por persona · ${mlong(cm)}</h2>${S.members.map(m=>{let o=0,p=0,det=[];S.services.forEach(s=>{const b=bill(s.id,cm),ow=owed(b,m.id),pd=paidBy(m.id,s.id,cm);if(ow||pd){o+=ow;p+=pd;det.push(`${E(s.name)}: ${money(pd)} de ${money(ow)}`)}});const pe=Math.max(0,o-p);
+return `<div class="row"><div class="grow"><b>${E(m.name)}</b><div class="mu">${det.join('<br>')||'Sin servicios este mes'}</div></div><div style="text-align:right"><div class="nw">${money(o)}</div>${o||p?`<span class="chip ${pe>0?'bad':'ok'}">${pe>0?'Falta '+money(pe):'✓'}</span>`:''}</div></div>`}).join('')}</div>`;
+h+=`<div class="card"><h2>Dónde está el dinero (total acumulado)</h2>${S.accounts.length?S.accounts.map(a=>{const v=sumB(S.pay.filter(p=>p.c==a.id),p=>p.a)-sumB(S.bills.filter(b=>b.c==a.id),b=>b.t);return `<div class="row"><span class="grow">${E(a.name)}</span><b class="nw">${money(v)}</b></div>`}).join(''):'<div class="mu">Sin cuentas.</div>'}<div class="mu" style="margin-top:6px">Abonos recibidos menos recibos pagados desde esa cuenta.</div></div>`;
+h+=`<div class="card"><h2>Acumulado de todos los meses</h2>${S.services.map(s=>{let tb=0,ow=0,pd=0,pe=0;S.bills.filter(b=>b.sv==s.id).forEach(b=>{tb+=b.t;b.p.forEach(id=>{const o=owed(b,id),p=paidBy(id,s.id,b.mo);ow+=o;pd+=Math.min(p,o);pe+=Math.max(0,o-p)})});
+return `<div class="row"><div class="grow"><b>${E(s.name)}</b><div class="mu">Recibos ${money(tb)} · Abonado ${money(pd)}</div></div><span class="chip ${pe>0?'bad':'ok'}">${pe>0?'Falta '+money(pe):'✓ Al día'}</span></div>`}).join('')}
+<div class="row"><div class="grow"><b>Total</b></div><b class="nw">${money(sumB(S.bills,b=>b.t))}</b></div></div>`;return h}
+
+/* ---------- Ajustes ---------- */
+const empty=t=>`<div class="card"><div class="mu">${t}</div><button class="btn" style="margin-top:10px" onclick="go('cfg')">Ir a Ajustes</button></div>`;
+const CAT={members:['Personas','Nombre de la persona'],services:['Servicios','Ej: Luz, Internet, Agua…'],accounts:['Bancos y cuentas','Ej: BANRURAL, Efectivo…']};
+const dup=(k,name,id)=>S[k].some(x=>x.id!=id&&x.name.toLowerCase()==name.toLowerCase());
+function addC(k){const i=$('new_'+k),name=i.value.trim();if(!name)return msg('Escribe un nombre');if(dup(k,name))return msg('Ya existe');
+const x={id:uid(),name};if(k=='services')x.p=S.members.map(m=>m.id);S[k].push(x);if(k=='members')S.services.forEach(s=>s.p.push(x.id));save();msg('Agregado');draw();const j=$('new_'+k);if(j)j.focus()}
+function saveC(k,id){const name=$('en_'+id).value.trim();if(!name)return msg('Escribe un nombre');if(dup(k,name,id))return msg('Ya existe');
+const x=S[k].find(y=>y.id==id);x.name=name;if(k=='services')x.p=S.members.filter(m=>$('ep_'+id+'_'+m.id).checked).map(m=>m.id);ce='';save();msg('Cambios guardados');draw()}
+function delC(k,id){const x=S[k].find(y=>y.id==id);if(!x)return;
+const used=k=='members'?S.pay.filter(p=>p.m==id).length:k=='services'?S.bills.filter(b=>b.sv==id).length+S.pay.filter(p=>p.sv==id).length:S.pay.filter(p=>p.c==id).length+S.bills.filter(b=>b.c==id).length;
+const w=k=='accounts'?'Se conservan los registros, pero quedarán sin cuenta.':'También se borran sus recibos y abonos.';
+if(!confirm(`¿Eliminar "${x.name}"?`+(used?`\n\nTiene ${used} registro(s). ${w}`:'')))return;
+S[k]=S[k].filter(y=>y.id!=id);
+if(k=='members'){S.pay=S.pay.filter(p=>p.m!=id);S.services.forEach(s=>s.p=s.p.filter(y=>y!=id));S.bills.forEach(b=>b.p=b.p.filter(y=>y!=id));S.bills=S.bills.filter(b=>b.p.length)}
+if(k=='services'){S.bills=S.bills.filter(b=>b.sv!=id);S.pay=S.pay.filter(p=>p.sv!=id)}
+if(k=='accounts'){S.pay.forEach(p=>{if(p.c==id)p.c=''});S.bills.forEach(b=>{if(b.c==id)b.c=''})}
+ce='';save();draw()}
+function catCard(k){const[t,ph]=CAT[k];
+return `<div class="card"><h2>${t}</h2><div class="add"><input id="new_${k}" type="text" placeholder="${ph}" onkeydown="if(event.key=='Enter')addC('${k}')"><button class="btn" onclick="addC('${k}')">Agregar</button></div>
+<div style="margin-top:8px">${S[k].length?S[k].map(x=>{const open=ce==='c'+x.id;
+return `<div style="border-bottom:1px solid var(--bd)"><div class="row" style="border:0"><div class="grow"><b>${E(x.name)}</b>${k=='services'?`<div class="mu">Participan: ${x.p.map(id=>E(nm('members',id))).join(', ')||'nadie'}</div>`:''}</div><button class="ib" onclick="ted('c${x.id}')" aria-label="Editar">${open?'✕':'✎'}</button><button class="ib d" onclick="delC('${k}','${x.id}')" aria-label="Eliminar">×</button></div>
+${open?`<div style="padding-bottom:8px"><label>Nombre</label><input id="en_${x.id}" type="text" value="${E(x.name)}">${k=='services'?`<label>Quiénes lo pagan por defecto</label><div class="chips">${S.members.map(m=>`<label><input type="checkbox" id="ep_${x.id}_${m.id}" ${x.p.includes(m.id)?'checked':''}> ${E(m.name)}</label>`).join('')}</div>`:''}<button class="btn" onclick="saveC('${k}','${x.id}')">Guardar cambios</button></div>`:''}</div>`}).join(''):'<div class="mu">Aún no hay nada. Escribe un nombre arriba y toca Agregar.</div>'}</div></div>`}
+function setCur(){S.cur=$('cur').value.trim()||'Q';save();msg('Guardado');draw()}
+function exp(){const b=new Blob([JSON.stringify(S)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='respaldo-servicios-'+today()+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);msg('Respaldo descargado')}
+function imp(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!okS(x))throw 0;if(!confirm('Esto reemplaza todos los datos actuales. ¿Continuar?'))return;S=Object.assign(def(),x);save();msg('Respaldo restaurado');draw()}catch(e){alert('El archivo no es un respaldo válido')}};r.readAsText(f)}
+function wipe(){if(!confirm('¿Borrar TODOS los datos de la app?')||!confirm('Esta acción no se puede deshacer. ¿Seguro?'))return;S=def();save();ce='';draw()}
+async function upd(){try{for(const x of await navigator.serviceWorker.getRegistrations())await x.unregister();for(const k of await caches.keys())await caches.delete(k)}catch(e){}location.reload()}
+function ajustes(){return catCard('members')+catCard('services')+catCard('accounts')+
+`<div class="card"><h2>Moneda</h2><label>Símbolo (Q, $, L…)</label><input id="cur" type="text" maxlength="4" value="${E(S.cur)}"><button class="btn" onclick="setCur()">Guardar</button></div>
+<div class="card"><h2>Respaldo de datos</h2><div class="btns"><button class="btn s" onclick="exp()">Guardar respaldo</button><button class="btn s" onclick="$('imf').click()">Restaurar respaldo</button></div><input id="imf" type="file" accept=".json,application/json" style="display:none" onchange="imp(this.files[0]);this.value=''"><div class="mu" style="margin-top:8px">Se guarda como archivo en tu teléfono.</div></div>
+<div class="card"><div class="btns"><button class="btn s" onclick="upd()">Actualizar app</button><button class="btn d" onclick="wipe()">Borrar todo</button></div></div>`}
+
+function draw(){
+$('n').innerHTML=[['res','📊','Resumen'],['rec','🧾','Recibos'],['pag','💵','Abonos'],['cfg','⚙️','Ajustes']].map(([k,i,l])=>`<button class="${tab==k?'on':''}" onclick="go('${k}')"><span>${i}</span>${l}</button>`).join('');
+$('v').innerHTML=tab=='res'?resumen():tab=='rec'?recibos():tab=='pag'?pagos():ajustes();
+if(tab=='rec')S.services.forEach(s=>bh(s.id));if(tab=='pag')pf(0)}
+draw();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
