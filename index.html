@@ -47,8 +47,8 @@ let SY=null;try{SY=JSON.parse(localStorage.getItem('serviciosSync')||'null')}cat
 let VIEW=null,VT=0;
 (function(){const m=location.hash.match(/ver=([^&]+)/);let v=null;
 if(m){try{v=JSON.parse(atob(decodeURIComponent(m[1])));if(!v.u||!v.c)v=null}catch(e){v=null}}
-if(v){VIEW=v;try{localStorage.setItem('serviciosViewer',JSON.stringify(v))}catch(e){};try{history.replaceState(null,'',location.pathname)}catch(e){}}
-else {const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;if(!SY||standalone){try{VIEW=JSON.parse(localStorage.getItem('serviciosViewer')||'null')}catch(e){}}}})();
+if(v){VIEW=v;try{localStorage.setItem('serviciosViewer',JSON.stringify(v))}catch(e){}}
+else if(!SY){try{VIEW=JSON.parse(localStorage.getItem('serviciosViewer')||'null')}catch(e){}}})();
 let S=def();
 if(VIEW){S=blank();try{const c=JSON.parse(localStorage.getItem('serviciosViewerData')||'null');if(c&&okS(c.d)){S=Object.assign(blank(),c.d);VT=c.t||0}}catch(e){}}
 else try{const x=JSON.parse(localStorage.getItem(K)||'null');if(okS(x))S=Object.assign(def(),x)}catch(e){}
